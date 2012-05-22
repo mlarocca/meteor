@@ -209,7 +209,7 @@ Template.api.meteor_call = {
 
 Template.api.meteor_apply = {
   id: "meteor_apply",
-  name: "Meteor.apply(name, params [, asyncCallback])",
+  name: "Meteor.apply(name, params [, options] [, asyncCallback])",
   locus: "Anywhere",
   descr: ["Invoke a method passing an array of arguments."],
   args: [
@@ -219,6 +219,12 @@ Template.api.meteor_apply = {
     {name: "params",
      type: "Array",
      descr: "Method arguments"},
+    {name: "options",
+     type: "Object",
+     descr: "Optional object with following fields:  " +
+     '<dl class="objdesc"><dt><span class="name">wait</span>' +
+     '<span class="type">Boolean</span></dt><dd>xcxc</dd></dl>'
+     + 'xcxc use http.call as reference'},
     {name: "asyncCallback",
      type: "Function",
      descr: "Optional callback.  If passed, the method runs asynchronously, instead of synchronously, and calls asyncCallback passing either the error or the result."}
