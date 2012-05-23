@@ -108,20 +108,20 @@ testAsyncMulti("livedata - basic method invocation", [
   // test that `wait: false` is respected
   function (test, expect) {
     if (Meteor.is_client) {
-      Meteor.apply("funkyman1", [], {wait: false}, expect(function(err, res) {
+      Meteor.apply("delayedTrue", [], {wait: false}, expect(function(err, res) {
         test.equal(res, false);
       }));
-      Meteor.apply("funkyman2", []);
+      Meteor.apply("makeDelayedTrueImmediatelyReturnFalse", []);
     }
   },
 
   // test that `wait: true` is respected
   function(test, expect) {
     if (Meteor.is_client) {
-      Meteor.apply("funkyman1", [], {wait: true}, expect(function(err, res) {
+      Meteor.apply("delayedTrue", [], {wait: true}, expect(function(err, res) {
         test.equal(res, true);
       }));
-      Meteor.apply("funkyman2", []);
+      Meteor.apply("makeDelayedTrueImmediatelyReturnFalse", []);
     }
   },
 

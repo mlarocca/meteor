@@ -33,6 +33,9 @@ Meteor._LivedataConnection = function (url, restart_on_update) {
   self.outstanding_methods = []; // each item has keys: msg, callback
   // the sole outstanding method that needs to be waited on, or null
   self.outstanding_wait_method = null; // same keys as outstanding_methods
+  // stores response from `outstanding_wait_method` while we wait for
+  // previous method calls to complete
+  self.outstanding_wait_method_response = null;
   // methods blocked on outstanding_wait_method being completed.
   self.blocked_methods = []; // each item has keys: msg, callback, wait
   // waiting for data from method

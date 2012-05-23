@@ -22,32 +22,32 @@ Meteor.methods({
   }
 });
 
-// Methods to help test applying methods with `wait: true`: funkyman1
-// returns true 500ms after being run unless funkyman2 was run in the
-// meanwhile
+// Methods to help test applying methods with `wait: true`: delayedTrue
+// returns true 500ms after being run unless turnDelayedTrueIntoImmediateFalse
+// was run in the meanwhile
 if (Meteor.is_server) {
-  var fun_future;
-  var fun_times;
+  var delayed_true_future;
+  var delayed_true_times;
   Meteor.methods({
-    funkyman1: function() {
-      fun_future = new Future();
-      fun_times = Meteor.setTimeout(function() {
-        fun_future['return'](true);
-        fun_future = null;
-        fun_times = null;
+    delayedTrue: function() {
+      delayed_true_future = new Future();
+      delayed_true_times = Meteor.setTimeout(function() {
+        delayed_true_future['return'](true);
+        delayed_true_future = null;
+        delayed_true_times = null;
       }, 500);
 
       this.unblock();
-      return fun_future.wait();
+      return delayed_true_future.wait();
     },
-    funkyman2: function() {
-      if (!fun_future)
-        return; // since funkyman1's timeout had already run
+    turnDelayedTrueIntoImmediateFalse: function() {
+      if (!delayed_true_future)
+        return; // since delayedTrue's timeout had already run
 
-      if (fun_times) clearTimeout(fun_times);
-      fun_future['return'](false);
-      fun_future = null;
-      fun_times = null;
+      if (delayed_true_times) clearTimeout(delayed_true_times);
+      delayed_true_future['return'](false);
+      delayed_true_future = null;
+      delayed_true_times = null;
     }
   });
 }

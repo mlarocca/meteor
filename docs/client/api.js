@@ -219,15 +219,15 @@ Template.api.meteor_apply = {
     {name: "params",
      type: "Array",
      descr: "Method arguments"},
-    {name: "options",
-     type: "Object",
-     descr: "Optional object with following fields:  " +
-     '<dl class="objdesc"><dt><span class="name">wait</span>' +
-     '<span class="type">Boolean</span></dt><dd>xcxc</dd></dl>'
-     + 'xcxc use http.call as reference'},
     {name: "asyncCallback",
      type: "Function",
      descr: "Optional callback.  If passed, the method runs asynchronously, instead of synchronously, and calls asyncCallback passing either the error or the result."}
+  ],
+  options: [
+    {name: "wait",
+     type: "Boolean",
+     descr: "(Client only) If true, don't send any subsequent method calls until this one is completed on the server, "
+            + "and only run the callback for this call until all previous method calls have completed on the server. "}
   ]
 };
 
@@ -748,7 +748,7 @@ Template.api.equals = {
 
 Template.api.httpcall = {
   id: "meteor_http_call",
-  name: "Meteor.http.call(method, url, [options], [asyncCallback])",
+  name: "Meteor.http.call(method, url [, options] [, asyncCallback])",
   locus: "Anywhere",
   descr: ["Perform an outbound HTTP request."],
   args: [
